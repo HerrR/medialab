@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html id="ng-app" ng-app="medialab"> <!-- id="ng-app" IE<8 -->
+    <head>
+        <title>Demo</title>
+        <link rel="stylesheet" href="node_modules/normalize.css/normalize.css"/>
+        <link rel="stylesheet" href="style.css" />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+        <script src="node_modules/angular/angular.min.js"></script>
+        <script src="node_modules/angular-file-upload/dist/angular-file-upload.min.js"></script>
+
+        <script src="js/model.js"></script>
+        <script src="js/controllers.js"></script>
+        <script src="js/directives.js"></script>
+    </head>
+
+    <body ng-controller="AppController" nv-file-drop="" uploader="uploader">
+        <div class="container">
+            <div ng-show="uploader.isHTML5" class="inline-block" style="width:60%;">
+                <div class="dropZone" nv-file-over="" uploader="uploader">
+                    Drag your files here
+                </div><div class="inline-block" style="width:20%; text-align:center;">
+                    Or
+                </div>
+            </div><input type="file" nv-file-select="" uploader="uploader" single class="chooseFileButton"/>
+
+            <div ng-repeat="item in uploader.queue" class="uploadInfo">
+                <div ng-if="controller.isImage(item._file)" class="inline-block">
+                    <div ng-thumb="{ file: item._file, height: 100 }"></div>
+                </div>
+                <div class="toBeUploaded uploadDetails">
+                    <div>Name: {{ item.file.name }}</div>
+                    <div>Size: {{ item.file.size/1024/1024|number:2 }} Mb</div>
+                </div>
+                <div class="buttons">
+                    <button ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">Upload</button>
+                    <button ng-click="item.cancel()" ng-disabled="!item.isUploading">Cancel</button>
+                    <button ng-click="item.remove()">Remove</button>
+                </div>
+            </div>
+
+            <div ng-show="isLoading()">
+                Loading...
+            </div>
+
+            <h1 ng-show="hasOutput()">Output</h1>
+            <div class="output">
+                <img ng-src="php/{{ faces().fullImage }}?{{ timestamp }}" class="imageLarge"/>
+                <div class="croppedFaces">
+                    <div ng-repeat="face in faces().croppedFaces" class="croppedFace">
+                        <img ng-src="php/{{ face.path }}?{{ timestamp }}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

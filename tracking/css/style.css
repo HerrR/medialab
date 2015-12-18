@@ -1,0 +1,67 @@
+html, body {
+  font-family:'Open Sans', sans-serif;
+}
+
+video, canvas {
+  position: absolute;
+}
+
+h1 {
+  font-family:'Bitter', sans-serif;
+}
+
+#mainHeading {
+  text-align: center;
+  font-size: 28pt;
+  margin-bottom: 40px;
+  border-bottom: 1px solid black;
+  padding-bottom: 5px;
+}
+
+.videoContainer {
+  position: relative;
+  display: inline-block;
+  height: 450px;
+  width: 540px;
+}
+
+#outputWindow {
+  text-align: center;
+}
+
+#outputWindow img {
+  display:inline-block;
+  max-width:50%;
+  width:125px;
+  margin:5px;
+  vertical-align: top;
+}
+
+.container {
+  width:90%;
+  margin:auto;
+}
+
+.stepInfo {
+  vertical-align:top;
+  width:60%;
+  padding:0px 20px;
+  box-sizing:border-box;
+  display: inline-block;
+}
+
+.picturesContainer {
+  width:40%;
+  display:inline-block;
+}
+
+#step1 .stepInfo {
+  width: calc(100% - 600px);
+  width: webkit-calc(100% - 600px);
+  width: moz-calc(100% - 600px);
+}
+
+#step4 .stepInfo {
+  width:100%;
+  text-align: center;
+}
