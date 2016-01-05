@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+  <title>Face Recognition</title>
+  <meta charset='utf-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="main.css" media="all">
+  <script src="capture.js"></script>
+</head>
+<body>
+<!-- Based on source code from article Taking still photos with WebRTC:
+  https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Taking_still_photos -->
+<div class="container">
+  <h1>Face Recognition</h1>
+  <p class="lead">1. Take a photo, 2. post it for recognition, 3. wait for the results.<br>(Requires a <a href="http://caniuse.com/#feat=stream">user media</a> capable browser such as Firefox or Chrome. Reload if you declined camera access.)</p>
+  <div class="well">
+    <h4>How this works</h4>
+    <p>The system returns a list of faces in the results based on their similarity to your captured face. <em>1st Similar Face</em> is the most similar one and therefore the most likely to belong to you, according to the system. Note that you can challenge the system with faces that use an extreme pose and expression or even people unknown to this system, i.e., his/her photo has not been stored and therefore learned by the system beforehand. In such a case the distance to the most similar face would be very large (more than appr. 45) indicating that it and the captured face are not of the same person.</p>
+    <p style="font-size: 150%">感谢大家捧场!</p>
+  </div>
+  <div class="camera">
+    <video id="video">Video stream not available.</video>
+    <button class="btn btn-success" id="startbutton">Take photo</button> 
+  </div>
+  <canvas id="canvas">
+  </canvas>
+  <div class="output">
+    <img id="photo" alt="The screen capture will appear in this box.">
+    <button class="btn btn-success" id="postbutton" disabled>Post photo</button> 
+  </div>
+  <p id="result">&nbsp;</p>
+  <p id="status">&nbsp;</p>
+</div>
+</body>
+</html>

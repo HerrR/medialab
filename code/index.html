@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Medialab - Face capture demo</title>
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Bitter:700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/tracking/build/tracking.js"></script>
+  <script src="node_modules/tracking/build/data/face-min.js"></script>
+
+  <script src="faceDetection.js"></script>
+  <script src="functions.js"></script>
+
+</head>
+<body>
+  <div class="container">
+    <h1 id="mainHeading">DM2582 Deep Learning Project Demo</h1>
+    <div class="stepContainer" id="step1">
+      <div class="videoContainer">
+        <video id="video" width="540" height="405" preload autoplay loop muted></video>
+        <canvas id="canvas" width="540" height="405"></canvas>
+      </div>
+      <div class="stepInfo">
+        <h1>Step 1</h1>
+        Locate the individual faces in a crowd. When the camera acknowledges all of the wanted faces, press the "Save faces" button below. In a practical implementation of our concept, the images would be taken at certain intervals or when a number of faces are found but for the sake of demonstration we have chosen to do this implementation. <br/><br/>
+
+        <div id="trackingStatus"></div><br/>
+
+        <button onclick="saveFaces()">Save faces</button><button onclick="toggleTrack()" id="playPause">Play/Pause Tracking</button>
+      </div>
+    </div>
+
+    <div class="stepContainer" id="step2" style="display:none;">
+      <div class="stepInfo">
+        <h1>Step 2</h1>
+        In this step, the faces have been extracted from the original image and are temoprarily saved individually. The next step is to extract the relevant features from the faces. To do so, we will make an API call to our backend which will run the facial iamges through a series of convolutional filter and ultimately return a feature vector. These feature vectors are what has been used to train our SVM classifiers to be able to make distinctions between male and female.<br/><br/>
+
+        For this project and for this demo, we will only handle male and female but a more practical implementation of a solution like this could take a lot of aspects into consideration. One that we have talked a lot about in our group is age. <br/><br/>
+
+        Click the button below to send the images to the backend for some sweet processing!<br/><br/>
+
+        <button onclick="callApi()">Process the faces</button>
+      </div><div class="picturesContainer"><div id="outputWindow"></div></div>
+    </div>
+
+    <div class="stepContainer" id="step3" style="display:none;">
+      <div class="stepInfo">
+        <h1>Step 3</h1>
+        We have now gotten our response from the backend and it's time to do some processing! When processing the data we look at the average of the people in the picture regarding gender. If there are almost equal ammounts of males and females (within the span 40-60%) a commercial will be shown at random which could appeal to both target groups. If there are more males or females in the scene however (70-100%) a commercial which is primarily targeting men and females respectively will be shown instead.<br/><br/>
+
+        The summarized information about the faces in this picture is shown in the table on the right.<br/><br/>
+
+        <button onclick="showCommercial()">Go to final step</button>
+      </div>
+    </div>
+
+    <div class="stepContainer" id="step4" style="display:none;">
+      <div class="stepInfo">
+        <h1>Final output</h1>
+        Commercial goes here<br/>
+        <button onclick="restart()">Restart</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
