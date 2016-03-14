@@ -33,10 +33,10 @@ var saveFaces = function(){
 
 		var img = canvas.toDataURL("image/jpeg");
 
-      	photoblob = dataURLtoBlob(img);
-      	model.photoBlobs.push(photoblob);
-      	postpicture(photoblob);
-      	// console.log(photoblob);
+    photoblob = dataURLtoBlob(img);
+    model.photoBlobs.push(photoblob);
+    postpicture(photoblob);
+
 		images.push(img);
 	}
 	
@@ -135,7 +135,7 @@ var postpicture = function(photoblob) {
   
 
   
-var fetchresult = function (url, ticket, dofetch) {
+  var fetchresult = function (url, ticket, dofetch) {
     var xhr;
     if (!dofetch) {
       // Don't actually fetch the first time - perform a short delay instead
@@ -251,12 +251,9 @@ var callApi = function(){
 			$("#step3").show();
 			scrollTo("#step3");
 			console.log(result);
-			// for(var r in result){
-			// 	console.log(result[r]);
-			// }
 		},
 		error: function(error){
-			console.log("Error: "+error);
+			console.log("Error: "+error.status+" "+error.statusText);
 		}
 	});
 }

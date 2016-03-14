@@ -1,6 +1,5 @@
 <?php
 	// $images =  $_POST["images"];
-	$genders = ["Male", "Female"];
 	// $blob = $_POST;
 	print_r($_POST);
 

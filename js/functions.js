@@ -33,10 +33,10 @@ var saveFaces = function(){
 
 		var img = canvas.toDataURL("image/jpeg");
 
-      	photoblob = dataURLtoBlob(img);
-      	model.photoBlobs.push(photoblob);
-      	postpicture(photoblob);
-      	// console.log(photoblob);
+  	photoblob = dataURLtoBlob(img);
+  	model.photoBlobs.push(photoblob);
+  	// postpicture(photoblob);
+
 		images.push(img);
 	}
 	
@@ -234,10 +234,10 @@ var fetchstatus = function(){
   }
   
 
-  
+
 var callApi = function(){
 	var blob = model.photoBlobs[0];
-	console.log(blob);
+	console.log(model.faces);
 	$.ajax({
 		type: "POST",
 		url: "php/backend.php",
@@ -245,12 +245,14 @@ var callApi = function(){
 		// data: blob,
 	    // processData: false,
     	// contentType: "multipart/form-data",
-		data: {images : model.faces},
+		data: { images : model.faces },
 		// dataType: "json",
 		success: function(result){
 			$("#step3").show();
 			scrollTo("#step3");
+      console.log("--- API CALL RESULTS ---");
 			console.log(result);
+      console.log("------------------------");
 			// for(var r in result){
 			// 	console.log(result[r]);
 			// }
